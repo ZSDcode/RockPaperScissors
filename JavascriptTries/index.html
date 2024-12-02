@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Javascript Function Calls</title>
+  </head>
+  <body>
+    <script>
+      function add7(x) {
+        let a = x + 7;
+        return a;
+      }
+
+      function multiply(a, b) {
+        let c = a * b;
+        return c;
+      }
+
+      function capitalise(string) {
+        lower = string.toLowerCase();
+        sub = lower.slice(1);
+        firstLetter = string[0];
+        capital = firstLetter.toUpperCase();
+        result = capital + sub;
+        return result;
+      }
+
+      function lastLetter(string) {
+        return string.slice(-1);
+      }
+
+      function getHumanChoice() {
+        choice = prompt("Rock, Paper or Scissors").toLowerCase();
+        return choice;
+      }
+
+      function getComputerChoice() {
+        randomNum = Math.random()
+        if (randomNum < 1/3) {
+          return "rock"
+        } else if (randomNum >= 1/3 && randomNum < 2/3) {
+          return "paper"
+        } else {
+          return "scissors"
+        }
+      }
+
+      let humanScore = 0;
+      let computerScore = 0;
+      let playCount = 0;
+
+      function playRound(humanChoice, computerChoice) {
+        if (humanChoice != "paper" && humanChoice != "rock" && humanChoice != "scissors") {
+          alert("Invalid Input! Try Again")
+          return "yes";
+        } else if (humanChoice == "paper" && computerChoice == "rock" || humanChoice == "rock" && computerChoice == "scissors" || humanChoice == "scissors" && computerChoice == "paper") {
+          humanScore += 1;
+          playCount += 1
+          alert(`You win! Your Score: ${humanScore}, Computer Score: ${computerScore}`);
+          question = prompt("Do you still want to play?")
+          return question;
+        } else if (humanChoice == "paper" && computerChoice == "scissors" || humanChoice == "rock" && computerChoice == "paper" || humanChoice == "scissors" && computerChoice == "rock") {
+          computerScore += 1;
+          playCount += 1
+          alert(`You lose! Your Score: ${humanScore}, Computer Score: ${computerScore}`);
+          question = prompt("Do you still want to play?")
+          return question;
+        } else {
+          playCount += 1
+          alert(`It's a draw! No points! Your Score: ${humanScore}, Computer Score: ${computerScore}`)
+          question = prompt("Do you still want to play?")
+          return question;
+        }
+      }
+
+      function playGame(question) {
+        lowered = question
+        if (lowered != "yes" && lowered != "no") {
+          question = prompt("Invalid Input! Please type Yes or No!")
+          playGame(question)
+        } else if (lowered == "yes") {
+          choice = getHumanChoice()
+          question = playRound(choice, getComputerChoice())
+          playGame(question)
+        } else if (lowered == "no") {
+          alert(`You played with me a total of ${playCount} times, out of which you've beaten me a total of ${humanScore} times whilst I've destroyed you a total of ${computerScore} times! Tough luck!`)
+        }
+      }
+      choice = getHumanChoice()
+      question = playRound(choice, getComputerChoice())
+      playGame(question)
+    </script>
+  </body>
+</html>
